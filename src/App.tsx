@@ -1,6 +1,7 @@
 import React from 'react';
 import axios, { CancelTokenSource } from 'axios';
 import Form from './components/Form';
+import IssuesList from './components/IssuesList';
 
 interface IPost {
   id: number;
@@ -70,15 +71,10 @@ const App = () => {
 
   return (
     <div className="App">
-<h1>Hello!</h1>
-<Form estimate={1} handleSaveEstimate={handleSaveEstimate} />
-      <ul className="posts">
-        {posts.map((post) => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
-          </li>
-        ))}
-      </ul> 
+      <div className="grid">
+          <Form estimate={1} handleSaveEstimate={handleSaveEstimate} />
+          <IssuesList posts={posts}/> 
+      </div>
       </div>
 );
 }
