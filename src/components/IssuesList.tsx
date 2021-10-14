@@ -8,19 +8,25 @@ interface IPost {
 interface Props {
     posts: IPost[],
     setSelectedIssue: (e: any) => void,
+    setEstimate: (estimate: number) => void,
 }
 
 const IssuesList = (props: Props) => {
+    const { posts, setSelectedIssue, setEstimate } = props; 
 
-    const { posts, setSelectedIssue } = props; 
-
+    // select issue to vote for 
     const handleSubmit = (e:any) => {
         e.preventDefault();
+
+        // if issue id matches target id, set as selected issue 
         for(let post in posts){
             if(posts[post].id == e.target.parentElement.id){
                 setSelectedIssue(posts[post])
             }
         }
+
+        // reset estimate hours to 0 
+        setEstimate(0);
       }
     
 

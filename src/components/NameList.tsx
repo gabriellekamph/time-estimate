@@ -9,15 +9,14 @@ interface Props {
 }
 
 // Name list with all users
-
 const NameList = (props: Props) => {
-
     const { nameList, setSelectedUser } = props;
 
+    // set selected user
     const handleUserClick = (e:any) => {
-        console.log("Just clicked on user with id " + e.target.id)
         e.preventDefault();
 
+        // if id in namelist match target id, set as selected user
         for(let user in nameList){
             if(nameList[user].id == e.target.id){
                 setSelectedUser(nameList[user])
@@ -31,7 +30,6 @@ const NameList = (props: Props) => {
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                     Users
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
                     {nameList.map((user:any) => (
                     <li key={user.id}>

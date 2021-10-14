@@ -25,6 +25,7 @@ const App = () => {
     ''
   );
 
+  // variables for slected user, issue and saved time estimate
   const [selectedIssue, setSelectedIssue] = React.useState(
     undefined
   );
@@ -33,6 +34,11 @@ const App = () => {
     undefined
   );
 
+  const [estimate, setEstimate]: [number, (estimate: number) => void] = React.useState(
+    0
+  );
+
+  // users
   const nameList = [
     {
       id: "1",
@@ -96,18 +102,13 @@ const App = () => {
       });
   }, []);
 
-  // Function to handle when new estimated is saved (after button click)
-  
-  function handleSaveEstimate() {
-    console.log("Estimate (not yet) saved! (but it's supposed to when this function is done :))");
-  }
 
   return (
     <div className="App">
       <div className="grid">
           <Vote 
-              estimate={1} 
-              handleSaveEstimate={handleSaveEstimate}
+              estimate={estimate} 
+              setEstimate={setEstimate}
               selectedIssue={selectedIssue}
               selectedUser={selectedUser}
               setSelectedUser={setSelectedUser}
@@ -116,7 +117,8 @@ const App = () => {
               /> 
           <IssuesList 
               posts={posts}
-              setSelectedIssue={setSelectedIssue}/>
+              setSelectedIssue={setSelectedIssue}
+              setEstimate={setEstimate}/>
       </div>
     </div>
    );

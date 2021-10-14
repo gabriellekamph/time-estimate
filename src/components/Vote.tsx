@@ -9,8 +9,8 @@ interface IPost {
   }
 
 interface Props {
-    handleSaveEstimate: () => void;
     estimate: number;
+    setEstimate: (estimate: number) => void
     posts: IPost[],
     selectedIssue: any,
     nameList: any,
@@ -19,9 +19,9 @@ interface Props {
 }
 
 const Vote = (props: Props) => {
+    const {estimate, setEstimate, selectedIssue, nameList, selectedUser, setSelectedUser} = props; 
 
-    const {handleSaveEstimate, posts, selectedIssue, nameList, selectedUser, setSelectedUser} = props; 
-    
+    // log current user and issue
     React.useEffect(() => {
         console.log(selectedUser)
         console.log(selectedIssue)
@@ -63,7 +63,9 @@ const Vote = (props: Props) => {
                 {selectedIssue !== undefined  && (
                 <div className="current-issue">
                     <h1 className="mb-2">{selectedIssue?.title}</h1>
-                    <Form estimate={1} handleSaveEstimate={handleSaveEstimate} /> 
+                    <Form 
+                        estimate={estimate}
+                        setEstimate={setEstimate} /> 
                 </div>
                 )}
             </div>
