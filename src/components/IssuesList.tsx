@@ -16,7 +16,11 @@ const IssuesList = (props: Props) => {
 
     const handleSubmit = (e:any) => {
         e.preventDefault();
-        setSelectedIssue(e.target.parentElement.id);
+        for(let post in posts){
+            if(posts[post].id == e.target.parentElement.id){
+                setSelectedIssue(posts[post])
+            }
+        }
       }
     
 
