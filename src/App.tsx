@@ -1,6 +1,7 @@
 import React from 'react';
 import axios, { CancelTokenSource } from 'axios';
-import Form from './components/Form';
+import Vote from './components/Vote';
+// import Form from './components/Form';
 import IssuesList from './components/IssuesList';
 
 interface IPost {
@@ -22,6 +23,10 @@ const App = () => {
 
   const [error, setError]: [string, (error: string) => void] = React.useState(
     ''
+  );
+
+  const [selectedIssue, setSelectedIssue] = React.useState(
+    undefined
   );
 
   const cancelToken = axios.CancelToken; //create cancel token
@@ -64,7 +69,6 @@ const App = () => {
   }, []);
 
   // Function to handle when new estimated is saved (after button click)
-
   function handleSaveEstimate() {
     console.log("Estimate (not yet) saved! (but it's supposed to when this function is done :))");
   }
@@ -72,11 +76,17 @@ const App = () => {
   return (
     <div className="App">
       <div className="grid">
-          <Form estimate={1} handleSaveEstimate={handleSaveEstimate} />
-          <IssuesList posts={posts}/> 
+          <Vote 
+              estimate={1} 
+              handleSaveEstimate={handleSaveEstimate}
+              selectedIssue={selectedIssue}
+              posts={posts} /> 
+          <IssuesList 
+              posts={posts}
+              setSelectedIssue={setSelectedIssue}/>
       </div>
-      </div>
-);
+    </div>
+   );
 }
 
 export default App;
