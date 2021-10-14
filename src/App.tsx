@@ -24,22 +24,9 @@ const App = () => {
     ''
   );
 
-  const cancelToken = axios.CancelToken; //create cancel token
-  const [cancelTokenSource, setCancelTokenSource]: [
-    CancelTokenSource,
-    (cancelTokenSource: CancelTokenSource) => void
-  ] = React.useState(cancelToken.source());
-
-  const handleCancelClick = () => {
-    if (cancelTokenSource) {
-      cancelTokenSource.cancel('User cancelled operation');
-    }
-  };
-
   React.useEffect(() => {
     axios
-      .get<IPost[]>('https://api.github.com/repos/Ant1N/time-estimate/issues', {
-        cancelToken: cancelTokenSource.token,
+      .get<IPost[]>('https://api.github.com/repos/gabriellekamph/time-estimate/issues', {
         headers: {
           'Content-Type': 'application/json',
         },
