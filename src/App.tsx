@@ -29,6 +29,30 @@ const App = () => {
     undefined
   );
 
+  const nameList = [
+    {
+      id: "1",
+      name: "Josefine"
+    },
+    {
+      id: "2",
+      name: "Isak"
+    },
+    {
+      id: "3",
+      name: "Malin"
+    },
+    {
+      id: "4",
+      name: "Petter"
+    },
+    {
+      id: "5",
+      name: "Gabrielle"
+    },
+  ]
+
+
   const cancelToken = axios.CancelToken; //create cancel token
   const [cancelTokenSource, setCancelTokenSource]: [
     CancelTokenSource,
@@ -69,6 +93,7 @@ const App = () => {
   }, []);
 
   // Function to handle when new estimated is saved (after button click)
+  
   function handleSaveEstimate() {
     console.log("Estimate (not yet) saved! (but it's supposed to when this function is done :))");
   }
@@ -80,7 +105,9 @@ const App = () => {
               estimate={1} 
               handleSaveEstimate={handleSaveEstimate}
               selectedIssue={selectedIssue}
-              posts={posts} /> 
+              posts={posts} 
+              nameList={nameList}
+              /> 
           <IssuesList 
               posts={posts}
               setSelectedIssue={setSelectedIssue}/>

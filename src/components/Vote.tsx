@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './Form';
 import { Navbar, Container } from 'react-bootstrap';
+import NameList from './NameList';
 
 interface IPost {
     id: number;
@@ -12,11 +13,12 @@ interface Props {
     estimate: number;
     posts: IPost[],
     selectedIssue: number | undefined,
+    nameList: any,
 }
 
 const Vote = (props: Props) => {
 
-    const {handleSaveEstimate, posts, selectedIssue} = props; 
+    const {handleSaveEstimate, posts, selectedIssue, nameList} = props; 
     const [issue, setIssue]: [any, (issue: any) => void] = React.useState(undefined);
 
 
@@ -43,7 +45,7 @@ const Vote = (props: Props) => {
                             </span>
                         </div>
                         <div className="name-list">
-                            Rullista med namn
+                            <NameList nameList={nameList} />
                         </div>
                     </Container>
                 </Navbar>
