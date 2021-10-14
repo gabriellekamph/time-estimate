@@ -43,7 +43,7 @@ const Vote = (props: Props) => {
                             </span>
                         </div>
                         <div className="name-list">
-                            Rullista med namn
+                            
                         </div>
                     </Container>
                 </Navbar>
