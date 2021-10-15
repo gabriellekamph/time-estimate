@@ -65,7 +65,9 @@ const Vote = (props: Props) => {
                     <h1 className="mb-2">{selectedIssue?.title}</h1>
                     <Form 
                         estimate={estimate}
-                        setEstimate={setEstimate} /> 
+                        setEstimate={setEstimate}
+                        selectedIssue={selectedIssue}
+                        selectedUser={selectedUser} /> 
                 </div>
                 )}
             </div>
