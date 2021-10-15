@@ -77,8 +77,7 @@ const App = () => {
 
   React.useEffect(() => {
     axios
-      .get<IPost[]>('https://api.github.com/repos/Ant1N/time-estimate/issues', {
-        cancelToken: cancelTokenSource.token,
+      .get<IPost[]>('https://api.github.com/repos/gabriellekamph/time-estimate/issues', {
         headers: {
           'Content-Type': 'application/json',
         },

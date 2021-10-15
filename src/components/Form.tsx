@@ -1,4 +1,3 @@
-import React from 'react';
 
 // Interface for Form component 
 interface FormInterface {
