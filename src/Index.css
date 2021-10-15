@@ -21,16 +21,21 @@ code {
 
 button {
   border: none;
-  border-radius: 5px;
+  border-radius: 5px !important;
   padding: 10px;
   background-color: rgb(24, 122, 202);
   color: #fff;
   font-weight: 700;
 }
 
+input {
+  padding: 10px;
+  margin-bottom:10px !important;
+}
+
 ul {
   list-style: none;
-  padding: 0;
+  padding: 0 !important;
 }
 
 
@@ -62,4 +67,14 @@ ul {
   padding: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+/* VOTE THIS ISSUE */ 
+
+.current-issue {
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  top: 100px;
+
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios, { CancelTokenSource } from 'axios';
-import Form from './components/Form';
+import Vote from './components/Vote';
+// import Form from './components/Form';
 import IssuesList from './components/IssuesList';
 
 interface IPost {
@@ -23,6 +24,56 @@ const App = () => {
   const [error, setError]: [string, (error: string) => void] = React.useState(
     ''
   );
+
+  // variables for slected user, issue and saved time estimate
+  const [selectedIssue, setSelectedIssue] = React.useState(
+    undefined
+  );
+
+  const [selectedUser, setSelectedUser] = React.useState(
+    undefined
+  );
+
+  const [estimate, setEstimate]: [number, (estimate: number) => void] = React.useState(
+    0
+  );
+
+  // users
+  const nameList = [
+    {
+      id: "1",
+      name: "Josefine"
+    },
+    {
+      id: "2",
+      name: "Isak"
+    },
+    {
+      id: "3",
+      name: "Malin"
+    },
+    {
+      id: "4",
+      name: "Petter"
+    },
+    {
+      id: "5",
+      name: "Gabrielle"
+    },
+  ]
+
+
+  const cancelToken = axios.CancelToken; //create cancel token
+  const [cancelTokenSource, setCancelTokenSource]: [
+    CancelTokenSource,
+    (cancelTokenSource: CancelTokenSource) => void
+  ] = React.useState(cancelToken.source());
+
+  const handleCancelClick = () => {
+    if (cancelTokenSource) {
+      cancelTokenSource.cancel('User cancelled operation');
+    }
+  };
 
   React.useEffect(() => {
     axios
@@ -50,20 +101,26 @@ const App = () => {
       });
   }, []);
 
-  // Function to handle when new estimated is saved (after button click)
-
-  function handleSaveEstimate() {
-    console.log("Estimate (not yet) saved! (but it's supposed to when this function is done :))");
-  }
 
   return (
     <div className="App">
       <div className="grid">
-          <Form estimate={1} handleSaveEstimate={handleSaveEstimate} />
-          <IssuesList posts={posts}/> 
+          <Vote 
+              estimate={estimate} 
+              setEstimate={setEstimate}
+              selectedIssue={selectedIssue}
+              selectedUser={selectedUser}
+              setSelectedUser={setSelectedUser}
+              posts={posts} 
+              nameList={nameList}
+              /> 
+          <IssuesList 
+              posts={posts}
+              setSelectedIssue={setSelectedIssue}
+              setEstimate={setEstimate}/>
       </div>
-      </div>
-);
+    </div>
+   );
 }
 
 export default App;

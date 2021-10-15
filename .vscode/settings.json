@@ -1,3 +1,9 @@
 {
-    "vscode.tsc.compiler.alertTSConfigChanges": "never"
+    "vscode.tsc.compiler.alertTSConfigChanges": "never",
+    "cSpell.ignoreWords": [
+        "isak",
+        "josefine",
+        "malin",
+        "namelist"
+    ]
 }
