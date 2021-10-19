@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from './Form';
+import Report from './Report';
 import { Navbar, Container } from 'react-bootstrap';
 import NameList from './NameList';
 
@@ -65,7 +66,10 @@ const Vote = (props: Props) => {
                     <h1 className="mb-2">{selectedIssue?.title}</h1>
                     <Form 
                         estimate={estimate}
-                        setEstimate={setEstimate} /> 
+                        setEstimate={setEstimate}
+                        selectedUser={selectedUser} />
+                    <Report 
+                        selectedIssue={selectedIssue} /> 
                 </div>
                 )}
             </div>

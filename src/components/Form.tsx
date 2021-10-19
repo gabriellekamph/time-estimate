@@ -1,18 +1,28 @@
+import React from "react";
 
 // Interface for Form component 
 interface FormInterface {
     estimate: number;
     setEstimate: (estimate: number) => void;
+    selectedUser: any;
 }
 
 // Input form
 const Form = (props: FormInterface) => {
-    const { estimate, setEstimate } = props;
+    const { estimate, setEstimate, selectedUser } = props;
+    const [errorMessage, setErrorMessage] = React.useState("");
 
     // handle submit for form 
     const handleSubmit = (e:any) => {
         e.preventDefault();
-        console.log(estimate)
+
+        if(selectedUser === undefined){
+            console.log("välj en användare")
+            setErrorMessage("Select a user to vote")
+        } else {
+            setErrorMessage("")
+            console.log(estimate)
+        }
     }
     
     // handle change in inputfield
@@ -37,6 +47,9 @@ const Form = (props: FormInterface) => {
                         onChange={e => handleChange(e)}
                         value={estimate}
                     /> hours
+                </div>
+                <div className="error-message">
+                    <p className="fw-bold">{errorMessage}</p>
                 </div>
                 <div className="form-button">
                     <button id="save-estimate-btn" type="submit">Save estimate</button>

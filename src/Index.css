@@ -43,7 +43,7 @@ ul {
   display: grid;
   grid-template-columns: 65% 35%;
   width: 100vw;
-  height: 100vh;
+  height: auto;
   background-color: #f1f1f1;
 }
 
@@ -53,6 +53,7 @@ ul {
   background-color: #fafafa;
   padding: 20px;
   overflow: scroll;
+  max-height: 1000px;
 }
 
 .issues-list h3 {
@@ -76,5 +77,16 @@ ul {
   text-align: center;
   position: relative;
   top: 100px;
+  padding: 20px;
+}
 
+.error-message {
+  color: rgb(167, 6, 6);
+}
+
+/* REPORT */
+
+.report-conatiner {
+  padding: 20px;
+  margin-top: 50px;
 }
