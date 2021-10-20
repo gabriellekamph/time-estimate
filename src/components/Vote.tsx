@@ -22,7 +22,9 @@ interface Props {
 const Vote = (props: Props) => {
     const {estimate, setEstimate, selectedIssue, nameList, selectedUser, setSelectedUser} = props; 
     let [estimates, setEstimates]: [number[], (estimates:number[]) => void] = React.useState([2,3,4,5,6])
-
+    let [updateEstimates, setUpdateEstimates]: [object, (estimates:object) => void] = React.useState({})
+    let [voted, setVoted]: [any, (voted: any) => void] = React.useState(false);
+    const [errorMessage, setErrorMessage]: [string, (errorMessage: string) => void] = React.useState("");
 
     React.useEffect(() => {
         fetch('http://localhost:3000/')
@@ -30,7 +32,6 @@ const Vote = (props: Props) => {
         .then(data => {
           
           let catchEstimates = [];
-
           if(selectedIssue !== undefined && data !== undefined){
             for(let issue in data){
                 if(data[issue].id === selectedIssue.id){
@@ -40,7 +41,17 @@ const Vote = (props: Props) => {
 
                     for(let estimate in estimateData){
                         catchEstimates.push(parseInt(estimateData[estimate].estimate));
-                        console.log(catchEstimates);
+                        console.log(estimateData[estimate])
+
+                        if(selectedUser !== undefined && estimateData[estimate].person === selectedUser.name){
+                            console.log("hittad")
+                            setVoted(true)
+                            setErrorMessage("You've already voted!")
+                            return;
+                        } else {
+                            setVoted(false)
+                            setErrorMessage("")
+                        }
                     }
                 }
             }
@@ -48,11 +59,9 @@ const Vote = (props: Props) => {
           }
     })
 
-
         console.log(selectedUser)
         console.log(selectedIssue)
-        console.log(estimates)
-      }, [selectedUser, selectedIssue]);
+      }, [selectedUser, selectedIssue, updateEstimates]);
 
 
     
@@ -97,7 +106,11 @@ const Vote = (props: Props) => {
                         estimate={estimate}
                         setEstimate={setEstimate}
                         selectedUser={selectedUser}
-                        selectedIssue={selectedIssue}  
+                        selectedIssue={selectedIssue}
+                        setUpdateEstimates={setUpdateEstimates}
+                        voted={voted}
+                        errorMessage={errorMessage}
+                        setErrorMessage={setErrorMessage}
                     />
                     {estimates.length === nameList.length && (
                         <Report 

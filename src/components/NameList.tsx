@@ -1,4 +1,3 @@
-import { AnyARecord } from 'node:dns';
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 
@@ -22,6 +21,8 @@ const NameList = (props: Props) => {
                 setSelectedUser(nameList[user])
             }
          }
+
+        
       }
 
     return (

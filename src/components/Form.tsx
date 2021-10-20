@@ -6,20 +6,21 @@ interface FormInterface {
     setEstimate: (estimate: number) => void;
     selectedIssue: any;
     selectedUser: any;
+    setUpdateEstimates: (updateEstimates: object) => void;
+    voted: any;
+    errorMessage: string;
+    setErrorMessage: (errorMessage: string) => void;
 }
 
 // Input form
 const Form = (props: FormInterface) => {
-    const [errorMessage, setErrorMessage] = React.useState("");
-    const { estimate, setEstimate, selectedIssue, selectedUser } = props;
-
+    const { estimate, setEstimate, selectedIssue, selectedUser, setUpdateEstimates, voted, errorMessage, setErrorMessage } = props;
     
     // Handle submit for form 
     const handleSubmit = (e:any) => {
         e.preventDefault();
 
         if(selectedUser === undefined){
-            console.log("välj en användare")
             setErrorMessage("Select a user to vote")
         } else {
             setErrorMessage("Your vote has been saved!")
@@ -48,7 +49,7 @@ const Form = (props: FormInterface) => {
            body: JSON.stringify(votingData)
        })
        .then(res => res.json())
-       .then(data => console.log(data));
+       .then(data => setUpdateEstimates(data));
         }
     }
     
@@ -66,6 +67,7 @@ const Form = (props: FormInterface) => {
     return (
         <div className="form-container" onSubmit={e => handleSubmit(e)}>
             <form>
+            {voted === false && (
                 <div className="form-input">
                     <input
                         name="estimate"
@@ -75,12 +77,15 @@ const Form = (props: FormInterface) => {
                         value={estimate}
                     /> hours
                 </div>
+                )}
                 <div className="error-message">
                     <p className="fw-bold">{errorMessage}</p>
                 </div>
+                {voted === false && (
                 <div className="form-button">
                     <button id="save-estimate-btn" type="submit">Save estimate</button>
                 </div>
+                )}
             </form>
         </div>
     )
