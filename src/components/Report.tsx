@@ -2,19 +2,13 @@ import { Row, Col } from "react-bootstrap";
 
 // Interface for Form component 
 interface Props {
-    selectedIssue: any;
+    estimates: number[]; 
 }
 
 // Input form
 const Report = (props: Props) => {
 
-    const { selectedIssue } = props; 
-    let id = selectedIssue.id;
-
-    // FETCH FROM BACK END 
-    // if issue id is the same, get array with estimate hours 
-
-    let estimates: number[] = [2,3,64,2]; 
+const { estimates } = props;
 
 // calc lowest
 const lowest = Math.min(...estimates);

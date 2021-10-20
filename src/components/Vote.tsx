@@ -27,6 +27,12 @@ const Vote = (props: Props) => {
         console.log(selectedUser)
         console.log(selectedIssue)
       }, [selectedIssue, selectedUser]);
+
+      
+      let estimates : number[] = [2, 5, 43, 7];
+
+      // FETCH FROM BACKEND 
+      // If selectedIssue.id is same, get estimates
     
         return (
             <div className="vote-issue">
@@ -68,8 +74,10 @@ const Vote = (props: Props) => {
                         estimate={estimate}
                         setEstimate={setEstimate}
                         selectedUser={selectedUser} />
+                    {estimates.length === nameList.length  && (
                     <Report 
-                        selectedIssue={selectedIssue} /> 
+                        estimates={estimates} /> 
+                    )}
                 </div>
                 )}
             </div>
