@@ -33,6 +33,8 @@ const Vote = (props: Props) => {
 
       // FETCH FROM BACKEND 
       // If selectedIssue.id is same, get estimates
+      
+    
     
         return (
             <div className="vote-issue">

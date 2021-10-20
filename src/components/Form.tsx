@@ -13,8 +13,8 @@ const Form = (props: FormInterface) => {
     const [errorMessage, setErrorMessage] = React.useState("");
     const { estimate, setEstimate, selectedIssue, selectedUser } = props;
 
+    
     // Handle submit for form 
-
     const handleSubmit = (e:any) => {
         e.preventDefault();
 
@@ -22,18 +22,14 @@ const Form = (props: FormInterface) => {
             console.log("välj en användare")
             setErrorMessage("Select a user to vote")
         } else {
-            setErrorMessage("")
-            console.log(estimate)
-        }
-        console.log(estimate)
-
+            setErrorMessage("Your vote has been saved!")
+            
         let estimateInput = estimate;
         let person = selectedUser.name;
         let id = selectedIssue.id;
        
 
         // Object with info to send to database
-
         let votingData = {
             id: id, // Id for issue
             person: person, // Person who voted
@@ -53,6 +49,7 @@ const Form = (props: FormInterface) => {
        })
        .then(res => res.json())
        .then(data => console.log(data));
+        }
     }
     
     // handle change in input field
