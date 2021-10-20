@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from './Form';
+import Report from './Report';
 import { Navbar, Container } from 'react-bootstrap';
 import NameList from './NameList';
 
@@ -26,6 +27,12 @@ const Vote = (props: Props) => {
         console.log(selectedUser)
         console.log(selectedIssue)
       }, [selectedIssue, selectedUser]);
+
+      
+      let estimates : number[] = [2, 5, 43, 7];
+
+      // FETCH FROM BACKEND 
+      // If selectedIssue.id is same, get estimates
     
         return (
             <div className="vote-issue">
@@ -65,7 +72,12 @@ const Vote = (props: Props) => {
                     <h1 className="mb-2">{selectedIssue?.title}</h1>
                     <Form 
                         estimate={estimate}
-                        setEstimate={setEstimate} /> 
+                        setEstimate={setEstimate}
+                        selectedUser={selectedUser} />
+                    {estimates.length === nameList.length  && (
+                    <Report 
+                        estimates={estimates} /> 
+                    )}
                 </div>
                 )}
             </div>
