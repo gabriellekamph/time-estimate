@@ -9,6 +9,7 @@ interface Props {
 const Report = (props: Props) => {
 
 const { estimates } = props;
+console.log(estimates)
 
 // calc lowest
 const lowest = Math.min(...estimates);
@@ -17,7 +18,7 @@ const lowest = Math.min(...estimates);
 const highest = Math.max(...estimates);
 
 // calc median 
-const median = (estimates: any) => {
+const median = (estimates: number[]) => {
     const mid = Math.floor(estimates.length / 2),
       nums = [...estimates].sort((a, b) => a - b);
     return estimates.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;

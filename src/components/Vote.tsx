@@ -21,19 +21,40 @@ interface Props {
 
 const Vote = (props: Props) => {
     const {estimate, setEstimate, selectedIssue, nameList, selectedUser, setSelectedUser} = props; 
+    let [estimates, setEstimates]: [number[], (estimates:number[]) => void] = React.useState([2,3,4,5,6])
 
-    // log current user and issue
+
     React.useEffect(() => {
+        fetch('http://localhost:3000/')
+        .then(res => res.json())
+        .then(data => {
+          
+          let catchEstimates = [];
+
+          if(selectedIssue !== undefined && data !== undefined){
+            for(let issue in data){
+                if(data[issue].id === selectedIssue.id){
+
+                    let estimateData = data[issue].estimates;
+                    console.log(estimateData)
+
+                    for(let estimate in estimateData){
+                        catchEstimates.push(parseInt(estimateData[estimate].estimate));
+                        console.log(catchEstimates);
+                    }
+                }
+            }
+            setEstimates(catchEstimates);
+          }
+    })
+
+
         console.log(selectedUser)
         console.log(selectedIssue)
-      }, [selectedIssue, selectedUser]);
+        console.log(estimates)
+      }, [selectedUser, selectedIssue]);
 
-      
-      let estimates : number[] = [2, 5, 43, 7];
 
-      // FETCH FROM BACKEND 
-      // If selectedIssue.id is same, get estimates
-      
     
     
         return (
@@ -78,8 +99,8 @@ const Vote = (props: Props) => {
                         selectedUser={selectedUser}
                         selectedIssue={selectedIssue}  
                     />
-                    {estimates.length === nameList.length  && (
-                    <Report 
+                    {estimates.length === nameList.length && (
+                        <Report 
                         estimates={estimates} /> 
                     )}
                 </div>
