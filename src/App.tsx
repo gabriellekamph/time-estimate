@@ -1,7 +1,5 @@
 import React from 'react';
-import axios, { CancelTokenSource } from 'axios';
 import Vote from './components/Vote';
-// import Form from './components/Form';
 import IssuesList from './components/IssuesList';
 
 interface IPost {
@@ -16,10 +14,10 @@ const App = () => {
     defaultPosts
   );
 
-  const [loading, setLoading]: [
-    boolean,
-    (loading: boolean) => void
-  ] = React.useState<boolean>(true);
+  // const [loading, setLoading]: [
+  //   boolean,
+  //   (loading: boolean) => void
+  // ] = React.useState<boolean>(true);
 
   const [error, setError]: [string, (error: string) => void] = React.useState(
     ''
@@ -62,43 +60,14 @@ const App = () => {
     },
   ]
 
-
-  const cancelToken = axios.CancelToken; //create cancel token
-  const [cancelTokenSource, setCancelTokenSource]: [
-    CancelTokenSource,
-    (cancelTokenSource: CancelTokenSource) => void
-  ] = React.useState(cancelToken.source());
-
-  const handleCancelClick = () => {
-    if (cancelTokenSource) {
-      cancelTokenSource.cancel('User cancelled operation');
-    }
-  };
-
+  //Fetches all issues from server.
   React.useEffect(() => {
-    axios
-      .get<IPost[]>('https://api.github.com/repos/gabriellekamph/time-estimate/issues', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        timeout: 10000,
-      })
-      .then((response) => {
-        setPosts(response.data);
-        setLoading(false);
-      })
-      .catch((ex) => {
-        let error = axios.isCancel(ex)
-          ? 'Request Cancelled'
-          : ex.code === 'ECONNABORTED'
-          ? 'A timeout has occurred'
-          : ex.response.status === 404
-          ? 'Resource Not Found'
-          : 'An unexpected error has occurred';
-
-        setError(error);
-        setLoading(false);
-      });
+    fetch('http://localhost:3000/')
+    .then(res => res.json())
+    .then(data => {
+      // console.log(data);
+      setPosts(data);
+    })
   }, []);
 
 
