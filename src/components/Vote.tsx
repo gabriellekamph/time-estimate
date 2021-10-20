@@ -73,11 +73,16 @@ const Vote = (props: Props) => {
                     <Form 
                         estimate={estimate}
                         setEstimate={setEstimate}
+<<<<<<< HEAD
                         selectedUser={selectedUser} />
                     {estimates.length === nameList.length  && (
                     <Report 
                         estimates={estimates} /> 
                     )}
+=======
+                        selectedIssue={selectedIssue}
+                        selectedUser={selectedUser} /> 
+>>>>>>> insert-votingData
                 </div>
                 )}
             </div>
